@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+    <title>Spike Bot</title>
+    <meta name="description" content="Description">
+
+    <link href="css/style.css" rel="stylesheet">
+    <script defer src="js/script.js"></script>
+
+    <!-- https://fontawesome.com/search -->
+    <script src="https://kit.fontawesome.com/311c71b442.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="title">
+        <a href="https://www.spikevolley.it/">
+            <img src="images/spike.png" alt="">
+        </a>
+        SPIKE BOT
+        <a href="https://www.spikevolley.it/">
+            <img src="images/spike.png" alt="">
+        </a>
+    </div>
+
+    <section class="main">
+        <div class="info-gara">
+            <label for="campionato">CAMPIONATO</label>
+            <select name="campionato" id="campionato-select"></select>
+            <label for="categoria">CATEGORIA</label>
+            <select name="categoria" id="categoria-select"></select>
+        </div>
+
+        <div class="team-selection">
+            <div class="home">
+                <label for="team-home-select">SQUADRA CASA</label>
+                <select name="team-home-select" class="team-select" id="home-select"></select>
+            </div>
+            <div class="separator"></div>
+            <div class="away">    
+                <label for="team-away-select">SQUADRA TRASFERTA</label>
+                <select name="team-away-select" class="team-select" id="away-select"></select>
+            </div>
+        </div>
+        
+        <div class="teams">
+            <div class="team" id="home">  
+                <img class="logo">
+                <h1 class="name"></h1>
+                <ul class="recent"></ul>
+                <p class="recent-label">PARTITE CASA</p>
+                <ul class="recent home">
+                </ul>
+            </div>
+            <div class="scontro">
+                <div class="info">
+                    <p id="categoria"></p>
+                    <span class="separator"></span>
+                    <p id="campionato"></p>
+                    <span class="separator"></span>
+                    <p id="orario"></p>
+                </div>
+                <div class="risultato">
+                    <p>SCONTRO DIRETTO</p>
+                    <h1 id="scontro-diretto"></h1>
+                </div>
+            </div>
+            <div class="team" id="away">
+                <img class="logo">
+                <h1 class="name"></h1>
+                <ul class="recent">
+                </ul>
+                <p class="recent-label">PARTITE TRASFERTA</p>
+                <ul class="recent away">
+
+                </ul>
+            </div>
+        </div>
+        <div id="data">
+            <h1>DATI<div class="h-separator"></div>
+            </h1>
+            <p>Votazione Utenti</p>
+            <span class="voti">
+                <p class="home"></p>
+                <div class="progress">
+                    <p class="home-label"></p>
+                    <p class="away-label"></p>
+                </div>
+                <p class="away"></p>
+            </span>
+            <div class="cols">
+                <div class="col">
+                    <h1>PARTITE</h1>
+                    <!---->
+                    <p>Partite Giocate</p>
+                    <span class="partite">
+                        <p class="home"></p>
+                        <div class="progress">
+                            <p class="home-label"></p>
+                            <p class="away-label"></p>
+                        </div>
+                        <p class="away"></p>
+                    </span>
+                    <!---->
+                    <p title="Rapporto tra le PARTITE VINTE e le PARTITE GIOCATE">Rapporto Partite Vinte/Giocate ⓘ</p>
+                    <span class="partite-vinte-giocate">
+                        <p class="home"></p>
+                        <div class="progress">
+                            <p class="home-label"></p>
+                            <p class="away-label"></p>
+                        </div>
+                        <p class="away"></p>
+                    </span>
+                    <p
+                        title="Rapporto tra le PARTITE VINTE IN CASA della SQUADRA IN CASA e le PARTITE VINTE IN TRASFERTA della SQUADRA IN TRASFERA">
+                        Rapporto Partite Casa/Trasferta ⓘ</p>
+                    <span class="partite-vinte-casa-trasfera">
+                        <p class="home"></p>
+                        <div class="progress">
+                            <p class="home-label"></p>
+                            <p class="away-label"></p>
+                        </div>
+                        <p class="away"></p>
+                    </span>
+                </div>
+                <div class="v-separator"></div>
+                <div class="col">
+                    <h1>PUNTI</h1>
+                    <!---->
+                    <p>Punti</p>
+                    <span class="punti">
+                        <p class="home"></p>
+                        <div class="progress">
+                            <p class="home-label"></p>
+                            <p class="away-label"></p>
+                        </div>
+                        <p class="away"></p>
+                    </span>
+                    <!---->
+                    <p title="Rapporto tra i PUNTI FATTI e le PARTITE GIOCATE">Rapporto Punti/Partite ⓘ</p>
+                    <span class="rapp-punti-partite">
+                        <p class="home"></p>
+                        <div class="progress">
+                            <p class="home-label"></p>
+                            <p class="away-label"></p>
+                        </div>
+                        <p class="away"></p>
+                    </span>
+                    <!---->
+                    <p
+                        title="Rapporto tra i PUNTI IN CASA della SQUADRA IN CASA e i PUNTI IN TRASFERTA della SQUADRA IN TRASFERTA">
+                        Rapporto Punti Casa/Trasferta ⓘ</p>
+                    <span class="rapp-punti-casa-tras">
+                        <p class="home"></p>
+                        <div class="progress">
+                            <p class="home-label"></p>
+                            <p class="away-label"></p>
+                        </div>
+                        <p class="away"></p>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div id="eval">
+            <h1>VALUTAZIONE<div class="h-separator"></div>
+            </h1>
+            <p class="vincitrice">Squadra Vincitrice</p>
+            <p id="eval-team"></p>
+            <p id="eval-score"></p>
+            <p class="title">Valutazione</p>
+            <span id="valutazione-pb">
+                <p class="home"></p>
+                <div class="progress">
+                    <p class="home-label"></p>
+                    <p class="away-label"></p>
+                </div>
+                <p class="away"></p>
+            </span>
+        </div>
+        <div id="votes">
+            <h1>CHI VOTI?<div class="h-separator"></div>
+            </h1>
+            <div class="buttons">
+                <button id="vote-home" class="vote-button">SQUADRA CASA</button>
+                <span class="v-separator"></span>
+                <button id="vote-away" class="vote-button">SQUADRA TRASFERTA</button>
+            </div>
+        </div>
+    </section>
+    <a href="torneo.html" class="pagina"><p>Pagina Torneo</p></a>
+</body>
+
+</html>
+
+
+<!--
+    <p>Votazione Utenti</p>
+    <span class="voti">
+        <p class="home"></p>
+        <div class="progress">
+            <p class="home-label"></p>
+            <p class="away-label"></p>
+        </div>
+        <p class="away"></p>
+    </span>
+-->
