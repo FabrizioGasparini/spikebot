@@ -565,9 +565,9 @@ async function vota_vincitore(votazione) {
         method: 'POST',
         body: body
     });
-    if (response.status === 201) {
-        const success = response.json()["success"];
-        if (toString(success).toLowerCase() === "false") {
+    if (response.status === 200) {
+        const success = await response.json()
+        if (success["success"] == false) {
             console.log("\tERRORE durante la VOTAZIONE!");
         } else {
             if (votazione['casa'] == 1) console.log(`${data['sqcasa']} VOTATA con SUCCESSO!`);

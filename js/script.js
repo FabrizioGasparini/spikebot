@@ -663,15 +663,12 @@ async function vota_vincitore(votazione) {
         body: body
     });
     if (response.status === 200) {
-        const success = response.json()["success"];
-        if (toString(success).toLowerCase() === "false")
-        {
+        const success = await response.json()
+        if (success["success"] == false) {
             console.log("\tERRORE durante la VOTAZIONE!");
-        }
-        else
-        {
-            if (votazione['casa'] == 1) console.log(`${data['sqcasa']} VOTATA con SUCCESSO!`);
-            else console.log(`${data['sqtras']} VOTATA con SUCCESSO!`);
+        } else {
+            if (votazione['casa'] == 1) console.log(`"SQUADRA IN CASA" VOTATA con SUCCESSO!`);
+            else console.log(`"SQUADRA IN TRASFERTA" VOTATA con SUCCESSO!`);
         }
     }
 }
