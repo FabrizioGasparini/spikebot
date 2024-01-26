@@ -345,9 +345,9 @@ async function setup()
     const campionato = document.getElementById('campionato')
     const categoria = document.getElementById('categoria')
 
-    var orario_text = data["data"].split(" ")[1].split(":")
-    orario_text.pop()
-    orario_text = orario_text[0] + ":" + orario_text[1]
+    var orario_text = data["data"]
+    console.log(orario_text.split(" ")[0])
+    orario_text = orario_text.split(" ")[0].split("-")[2] + "/" + orario_text.split(" ")[0].split("-")[1] + "/" + orario_text.split(" ")[0].split("-")[0] + " | " + orario_text.split(" ")[1].split(":")[0] + ":" + orario_text.split(" ")[1].split(":")[1]
 
     var campionato_text = data["campionato"]
     campionato_text = campionato_text.replace("COMITATO", "C.")
@@ -526,7 +526,7 @@ async function setup()
     if (eval > 0) eval_team.innerText = data["sqcasa"]
     else eval_team.innerText = data["sqtras"]
     
-    eval_score.innerText = "+ " + eval
+    eval_score.innerText = "+ " + Math.abs(eval)
 
     const vote_home_btn = document.getElementById('vote-home')
     const vote_away_btn = document.getElementById('vote-away')
