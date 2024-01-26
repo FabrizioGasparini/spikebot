@@ -527,10 +527,10 @@ async function setup(data) {
     const eval_team = document.getElementById('eval-team')
     const eval_score = document.getElementById('eval-score')
 
-    if (eval > 0) {
-        eval_team.innerText = data["sqcasa"]
-        eval_score.innerText = "+ " + eval
-    }
+    if (eval > 0) eval_team.innerText = data["sqcasa"]
+    else eval_team.innerText = data["sqtras"]
+    
+    eval_score.innerText = "+ " + eval
 
     const vote_home_btn = document.getElementById('vote-home')
     const vote_away_btn = document.getElementById('vote-away')
