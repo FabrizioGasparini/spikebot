@@ -318,6 +318,8 @@ function setup_progress_bar(progress, casa, tras)
 }
 
 
+partita = null
+
 async function setup(data) {
     const team_home = document.getElementById('home')
     const team_away = document.getElementById('away')
@@ -350,16 +352,17 @@ async function setup(data) {
     orario_text.pop()
     orario_text = orario_text[0] + ":" + orario_text[1]
 
-    var campionato_text = data["commettee"]
+    var campionato_text = await get_campionati_from_id(data["commettee"])
     campionato_text = campionato_text.replace("COMITATO", "C.")
     campionato_text = campionato_text.replace("TERRITORIALE", "T.")
     campionato_text = campionato_text.replace("REGIONALE", "R.")
 
-    var categoria_text = data["girone"]
+    var categoria_text = await get_categoria_from_id(data["commettee"], data["girone"])
     categoria_text = categoria_text.replace("Under ", "U")
     categoria_text = categoria_text.replace("Prima", "1°")
     categoria_text = categoria_text.replace("Seconda", "2°")
     categoria_text = categoria_text.replace("Terza", "3°")
+    categoria_text = categoria_text.replace("Interregionale", "I. ")
 
     categoria_text = categoria_text.replace(" Femminile", "F")
     categoria_text = categoria_text.replace(" Maschile", "M")
@@ -669,18 +672,39 @@ async function vota_vincitore(votazione) {
         } else {
             if (votazione['casa'] == 1) console.log(`"SQUADRA IN CASA" VOTATA con SUCCESSO!`);
             else console.log(`"SQUADRA IN TRASFERTA" VOTATA con SUCCESSO!`);
+            setup(partita)
         }
     }
 }
 async function get_campionati() {
     const url = "https://www.spikevolley.it/livescore/read/comitati.php";
-
+    
     const response = await fetch(url, {
         method: 'GET'
     });
-
+    
     if (response.status === 201) {
         return await response.json();
+    }
+}
+
+async function get_campionati_from_id(id) {
+    const url = "https://www.spikevolley.it/livescore/read/comitati.php";
+    
+    const response = await fetch(url, {
+        method: 'GET'
+    });
+    
+    if (response.status === 201) {  
+        data = await response.json();
+        for (const campionato of data)
+        {
+            if (campionato["id_new"] == id)
+            {
+                console.log(campionato)
+                return campionato["nome"]
+            }    
+        }
     }
 }
 
@@ -700,6 +724,31 @@ async function get_categorie(id_campionato) {
         return await response.json();
     }
 }
+
+async function get_categoria_from_id(id_campionato, id_categoria) {
+    const url = "https://www.spikevolley.it/livescore/read/campionati.php";
+
+    const body = JSON.stringify({
+        "comitato": id_campionato
+    });
+
+    const response = await fetch(url, {
+        method: 'POST',
+        body: body
+    });
+
+    if (response.status === 201) {
+        data = await response.json();
+        for (const categoria of data)
+        {
+            if (categoria["id"] == id_categoria)
+            {
+                return categoria["title"]
+            }    
+        }
+    }
+}
+
 
 async function get_squadre(commettee, campionato) {
     const url = "https://www.spikevolley.it/livescore/read/giornate.php";

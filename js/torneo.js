@@ -359,6 +359,8 @@ async function setup()
     categoria_text = categoria_text.replace("Prima", "1°")
     categoria_text = categoria_text.replace("Seconda", "2°")
     categoria_text = categoria_text.replace("Terza", "3°")
+    categoria_text = categoria_text.replace("Interregionale", "I. ")
+
 
     categoria_text = categoria_text.replace(" Femminile", "F")
     categoria_text = categoria_text.replace(" Maschile", "M")
