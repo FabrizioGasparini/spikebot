@@ -380,25 +380,27 @@ async function setup(data) {
 
     recenti_home.innerHTML = ''
     for (let index = 0; index < 5; index++) {
-        var risultato = recenti_home_data["partite"][index];
-        
-        var partita = document.createElement('h1')
-        
-        partita.className = risultato == "V" ? "win" : "loss";
-        partita.innerText = risultato;
-        
-        recenti_home.append(partita)
-        
-        recenti_home_only.innerHTML = ''
-        if (index < recenti_home_data["partitecasa"].length) {
-            risultato = recenti_home_data["partitecasa"][index];
+        if (index < recenti_home_data["partite"].length) {
+            var risultato = recenti_home_data["partite"][index];
             
-            partita = document.createElement('h1')
-        
+            var partita = document.createElement('h1')
+            
             partita.className = risultato == "V" ? "win" : "loss";
             partita.innerText = risultato;
             
-            recenti_home_only.append(partita)
+            recenti_home.append(partita)
+            
+            recenti_home_only.innerHTML = ''
+            if (index < recenti_home_data["partitecasa"].length) {
+                risultato = recenti_home_data["partitecasa"][index];
+                
+                partita = document.createElement('h1')
+            
+                partita.className = risultato == "V" ? "win" : "loss";
+                partita.innerText = risultato;
+                
+                recenti_home_only.append(partita)
+            }
         }
     }
 
