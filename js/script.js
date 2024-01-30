@@ -301,8 +301,14 @@ async function get_classifica(data_gara) {
 
 function setup_progress_bar(progress, casa, tras)
 {
-    const perc_casa = Math.round((casa / (casa + tras) * 100))
-    const perc_tras = 100 - (perc_casa)
+    var perc_casa = Math.round((casa / (casa + tras) * 100))
+    var perc_tras = 100 - (perc_casa)
+
+    if (casa == tras)
+    {
+        perc_casa = 50
+        perc_tras = 50
+    }
 
     progress.querySelector(".home").innerText = casa 
     progress.querySelector(".away").innerText = tras
@@ -409,25 +415,27 @@ async function setup(data) {
 
     recenti_away.innerHTML = ''
     for (let index = 0; index < 5; index++) {
-        var risultato = recenti_away_data["partite"][index];
-        
-        var partita = document.createElement('h1')
-        
-        partita.className = risultato == "V" ? "win" : "loss";
-        partita.innerText = risultato;
-        
-        recenti_away.append(partita)
-        
-        recenti_away_only.innerHTML = ''
-        if (index < recenti_away_data["partitetras"].length) {
-            risultato = recenti_away_data["partitetras"][index];
+        if (index < recenti_away_data["partite"].length) {    
+            var risultato = recenti_away_data["partite"][index];
             
-            partita = document.createElement('h1')
+            var partita = document.createElement('h1')
             
             partita.className = risultato == "V" ? "win" : "loss";
             partita.innerText = risultato;
             
-            recenti_away_only.append(partita)
+            recenti_away.append(partita)
+            
+            recenti_away_only.innerHTML = ''
+            if (index < recenti_away_data["partitetras"].length) {
+                risultato = recenti_away_data["partitetras"][index];
+                
+                partita = document.createElement('h1')
+                
+                partita.className = risultato == "V" ? "win" : "loss";
+                partita.innerText = risultato;
+                
+                recenti_away_only.append(partita)
+            }
         }
     }
     
@@ -465,8 +473,8 @@ async function setup(data) {
     // == VOTAZIONE UTENTI ==
     const voti_pb = dati.querySelector('.voti')
     
-    const voti_casa = parseInt(voti_data[0]['casa'])
-    const voti_tras = parseInt(voti_data[0]['trasferta'])
+    var voti_casa = parseInt(voti_data[0]['casa'])
+    var voti_tras = parseInt(voti_data[0]['trasferta'])
     setup_progress_bar(dati, voti_casa, voti_tras)
     
     // == PARITE GIOCATE ==
@@ -476,16 +484,23 @@ async function setup(data) {
     // == PARITE VINTE/GIOCATE ==
     const partite_vinte_pb = dati.querySelector('.partite-vinte-giocate')
     
-    const partite_vinte_casa = Math.round(parseInt(casa['garevinte']) / partite_casa * 100) / 100
-    const partite_vinte_tras = Math.round(parseInt(tras['garevinte']) / partite_tras * 100) / 100
-    setup_progress_bar(partite_vinte_pb, partite_vinte_casa, partite_vinte_tras)
+    var partite_vinte_casa = Math.round(parseInt(casa['garevinte']) / partite_casa * 100) / 100
+    var partite_vinte_tras = Math.round(parseInt(tras['garevinte']) / partite_tras * 100) / 100
 
+    if(partite_casa == 0) partite_vinte_casa = 0
+    if(partite_tras == 0) partite_vinte_tras = 0
+    
+    setup_progress_bar(partite_vinte_pb, partite_vinte_casa, partite_vinte_tras)
+    
     // == RAPP PARITE VINTE CASA/TRAS ==
     const partite_vinte_casa_trasferta = dati.querySelector('.partite-vinte-casa-trasfera')
     
-    const rapp_partite_vinte_casa_casa = Math.round(partite_vinte_casa_casa / partite_casa_casa * 100) / 100
-    const rapp_partite_vinte_tras_tras = Math.round(partite_vinte_tras_tras / partite_tras_tras * 100) / 100
-
+    
+    var rapp_partite_vinte_casa_casa = Math.round(partite_vinte_casa_casa / partite_casa_casa * 100) / 100
+    var rapp_partite_vinte_tras_tras = Math.round(partite_vinte_tras_tras / partite_tras_tras * 100) / 100
+    
+    if(partite_casa_casa == 0) rapp_partite_vinte_casa_casa = 0
+    if(partite_tras_tras == 0) rapp_partite_vinte_tras_tras = 0
     setup_progress_bar(partite_vinte_casa_trasferta, rapp_partite_vinte_casa_casa, rapp_partite_vinte_tras_tras)
     
     // == PUNTI CLASSIFICA ==
@@ -495,15 +510,22 @@ async function setup(data) {
     // == RAPP PUNTI/PARTITE ==
     const punti_casa_pb = dati.querySelector('.rapp-punti-partite')
     
-    const rapp_punti_partite_casa = Math.round(punti_casa / partite_casa * 100) / 100
-    const rapp_punti_partite_tras = Math.round(punti_tras / partite_tras * 100) / 100
+    var rapp_punti_partite_casa = Math.round(punti_casa / partite_casa * 100) / 100
+    var rapp_punti_partite_tras = Math.round(punti_tras / partite_tras * 100) / 100
+
+    if(partite_casa == 0) rapp_punti_partite_casa = 0
+    if(partite_tras == 0) rapp_punti_partite_tras = 0
+
     setup_progress_bar(punti_casa_pb, rapp_punti_partite_casa, rapp_punti_partite_tras)
 
     // == RAPP PUNTI CASA/TRAS ==
     const punti_casa_tras_pb = dati.querySelector('.rapp-punti-casa-tras')
     
-    const rapp_punti_casa_tras_casa = Math.round(punti_casa_casa / partite_casa_casa * 100) / 100
-    const rapp_punti_casa_tras_tras = Math.round(punti_tras_tras / partite_tras_tras * 100) / 100
+    var rapp_punti_casa_tras_casa = Math.round(punti_casa_casa / partite_casa_casa * 100) / 100
+    var rapp_punti_casa_tras_tras = Math.round(punti_tras_tras / partite_tras_tras * 100) / 100
+
+    if(partite_casa_casa == 0) rapp_punti_casa_tras_casa = 0
+    if(partite_tras_tras == 0) rapp_punti_casa_tras_tras = 0
     
     setup_progress_bar(punti_casa_tras_pb, rapp_punti_casa_tras_casa, rapp_punti_casa_tras_tras)
     
