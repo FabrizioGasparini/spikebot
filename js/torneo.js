@@ -340,13 +340,28 @@ async function setup()
     // SCONTRO DIRETTO
     andata = await get_partita_andata(data)
     const scontro_diretto = document.getElementById('scontro-diretto')
+    const scontro_diretto_label = document.getElementById('scontro-diretto-label')
     
-     if (andata != null) {
-        risultato_andata = andata["risultato"]
-        if (risultato_andata.includes("-")) risultato_andata = risultato_andata.split("-")
-        else risultato_andata = risultato_andata.split("/")
+    if (data["risultato"] == "-")
+    {    
+        if (andata != null) {
+            risultato_andata = andata["risultato"]
+            if (risultato_andata.includes("-")) risultato_andata = risultato_andata.split("-")
+            else risultato_andata = risultato_andata.split("/")
+        }
+        scontro_diretto.innerText = andata != null ? (risultato_andata[1] + " / " + risultato_andata[0]) : '/'
+        scontro_diretto_label.innerText = "SCONTRO DIRETTO"
     }
-    scontro_diretto.innerText = andata != null ? (risultato_andata[1] + " / " + risultato_andata[0]) : '/'
+    else
+    {
+        risultato = data["risultato"]
+
+        if (risultato.includes("-")) risultato = risultato.split("-")
+        else risultato = risultato.split("/")
+        
+        scontro_diretto.innerText = risultato[0] + " / " + risultato[1]
+        scontro_diretto_label.innerHTML = "<b style='font-size:50px'>RISULTATO</b>"
+    }
     
     // INFO PARTITA
     
@@ -596,10 +611,10 @@ async function vota_vincitore(votazione) {
     if (response.status === 200) {
         const success = await response.json()
         if (success["success"] == false) {
-            console.log("\tERRORE durante la VOTAZIONE!");
+            alert("ERRORE durante la VOTAZIONE!\n(VOTO GIÀ EFFETTUATO)");
         } else {
-            if (votazione['casa'] == 1) console.log(`${data['sqcasa']} VOTATA con SUCCESSO!`);
-            else console.log(`${data['sqtras']} VOTATA con SUCCESSO!`);
+            if (votazione['casa'] == 1) alert(`${data['sqcasa']} VOTATA con SUCCESSO!`);
+            else alert(`${data['sqtras']} VOTATA con SUCCESSO!`);
         }
     }
 }
