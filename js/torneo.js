@@ -498,8 +498,8 @@ async function setup()
     // == PARITE VINTE/GIOCATE ==
     const partite_vinte_pb = dati.querySelector('.partite-vinte-giocate')
     
-    const partite_vinte_casa = Math.round(parseInt(casa['garevinte']) / partite_casa * 100) / 100
-    const partite_vinte_tras = Math.round(parseInt(tras['garevinte']) / partite_tras * 100) / 100
+    var partite_vinte_casa = Math.round(parseInt(casa['garevinte']) / partite_casa * 100) / 100
+    var partite_vinte_tras = Math.round(parseInt(tras['garevinte']) / partite_tras * 100) / 100
 
     if(partite_casa == 0) partite_vinte_casa = 0
     if(partite_tras == 0) partite_vinte_tras = 0
@@ -510,8 +510,8 @@ async function setup()
     const partite_vinte_casa_trasferta = dati.querySelector('.partite-vinte-casa-trasfera')
     
     
-    const rapp_partite_vinte_casa_casa = Math.round(partite_vinte_casa_casa / partite_casa_casa * 100) / 100
-    const rapp_partite_vinte_tras_tras = Math.round(partite_vinte_tras_tras / partite_tras_tras * 100) / 100
+    var rapp_partite_vinte_casa_casa = Math.round(partite_vinte_casa_casa / partite_casa_casa * 100) / 100
+    var rapp_partite_vinte_tras_tras = Math.round(partite_vinte_tras_tras / partite_tras_tras * 100) / 100
     
     if(partite_casa_casa == 0) rapp_partite_vinte_casa_casa = 0
     if(partite_tras_tras == 0) rapp_partite_vinte_tras_tras = 0
@@ -524,8 +524,8 @@ async function setup()
     // == RAPP PUNTI/PARTITE ==
     const punti_casa_pb = dati.querySelector('.rapp-punti-partite')
     
-    const rapp_punti_partite_casa = Math.round(punti_casa / partite_casa * 100) / 100
-    const rapp_punti_partite_tras = Math.round(punti_tras / partite_tras * 100) / 100
+    var rapp_punti_partite_casa = Math.round(punti_casa / partite_casa * 100) / 100
+    var rapp_punti_partite_tras = Math.round(punti_tras / partite_tras * 100) / 100
 
     if(partite_casa == 0) rapp_punti_partite_casa = 0
     if(partite_tras == 0) rapp_punti_partite_tras = 0
@@ -535,8 +535,8 @@ async function setup()
     // == RAPP PUNTI CASA/TRAS ==
     const punti_casa_tras_pb = dati.querySelector('.rapp-punti-casa-tras')
     
-    const rapp_punti_casa_tras_casa = Math.round(punti_casa_casa / partite_casa_casa * 100) / 100
-    const rapp_punti_casa_tras_tras = Math.round(punti_tras_tras / partite_tras_tras * 100) / 100
+    var rapp_punti_casa_tras_casa = Math.round(punti_casa_casa / partite_casa_casa * 100) / 100
+    var rapp_punti_casa_tras_tras = Math.round(punti_tras_tras / partite_tras_tras * 100) / 100
 
     if(partite_casa_casa == 0) rapp_punti_casa_tras_casa = 0
     if(partite_tras_tras == 0) rapp_punti_casa_tras_tras = 0
