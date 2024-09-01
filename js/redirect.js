@@ -6,7 +6,7 @@ window.addEventListener('load', async () => {
         "code": code,
         "client_secret": "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",
         "client_id": "14536006715-6cm2ajnipa0qr8v1s5ot1h2e5jrmg14s.apps.googleusercontent.com",
-        "redirect_uri": "https://fabriziogasparini.github.io/SpikeBot/redirect.html",
+        "redirect_uri": "https://fabriziogasparini.github.io/spikebot/redirect.html",
         "grant_type": "authorization_code"
     })
 
